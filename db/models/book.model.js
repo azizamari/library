@@ -17,11 +17,11 @@ module.exports = (sequelize) => {
         numberOfPages:{
             type:DataTypes.INTEGER,
         },
-        AuthorId:{
+        authorId:{
             type: DataTypes.INTEGER,
             references: {
-            model: sequelize.Author,
-            key: 'id'
+                model: 'authors',
+                key: 'id'
             }
         }
     })

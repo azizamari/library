@@ -17,6 +17,6 @@ for (const modelDefiner of modelDefiners) {
 
 const { book, author } = sequelize.models;
 
-author.hasMany(book,{foreignKey:'AuthorId'})
+author.hasMany(book,{foreignKey:'authorId'})
 
 module.exports = sequelize;
