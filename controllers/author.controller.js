@@ -8,13 +8,28 @@ exports.getAllAuthors=async (req,res)=>{
     }
 }
 exports.getAuthorById=async (req,res)=>{
-    res.status(200).json(await author.findById(req.params.id))
+    authorObj=await author.findByPk(req.params.id)
+    if(authorObj!=null)
+        res.status(200).json(authorObj)
+    res.status(404).json({error:`Author with id ${req.params.id} does not exist`})  
 }
-exports.postAuthor=async (req,res)=>{
-    try{
-        const record=await author.create(req.body);
-        res.status(201).json(record)
-    }catch(err){
-        res.json(err)
-    }
+exports.postAuthor=(req,res)=>{
+    author.create(req.body).then(response=>{
+        res.status(201).json(response)
+    }).catch(err=>{
+        res.status(400).json({message:err.errors[0].message})
+    })
+}
+exports.deleteAuthorById=async (req,res)=>{
+    authorObj=await author.findByPk(req.params.id)
+    if(authorObj ==null)
+        res.status(404).json({message:`Author with id ${req.params.id} does not exist`})
+
+    author.destroy({
+        where: { id: req.params.id }
+    });
+    res.status(200).json({
+        message:"Author deleted successfully",
+        author:authorObj
+    });
 }
