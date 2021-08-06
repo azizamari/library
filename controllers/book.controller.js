@@ -46,3 +46,23 @@ exports.deleteBookById=async (req,res)=>{
         book:bookObj
     });
 }
+exports.updateBook= async(req,res)=>{
+    try {
+        const { isbn } = req.params;
+        const [updated] = await book.update(req.body, {
+            where: { isbn: isbn }
+        });
+        if (updated) {
+            const updatedBook = await book.findByPk(req.body.isbn || isbn,{
+                include: {
+                  model: author,
+                  attributes: ['name', 'birthYear','gender'],  // return only these columns
+                },
+            });
+            return res.status(200).json({ user: updatedBook });
+        }
+        throw new Error('book not found');
+    } catch (error) {
+        return res.status(500).send(error.message);
+    }
+}
