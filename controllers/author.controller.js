@@ -13,7 +13,12 @@ exports.getAllAuthors=async (req,res)=>{
     }
 }
 exports.getAuthorById=async (req,res)=>{
-    authorObj=await author.findByPk(req.params.id)
+    authorObj=await author.findByPk(req.params.id,{
+        include: {
+            model: book,
+            attributes: ['isbn','title']
+        }
+    })
     if(authorObj!=null)
         res.status(200).json(authorObj)
     res.status(404).json({error:`Author with id ${req.params.id} does not exist`})  
