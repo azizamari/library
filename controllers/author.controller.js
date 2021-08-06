@@ -1,8 +1,13 @@
-const {author}=require('../db').models
+const {author,book}=require('../db').models
 
 exports.getAllAuthors=async (req,res)=>{
     try {
-        res.status(200).json(await author.findAll());
+        res.status(200).json(await author.findAll({
+            include: {
+                model: book,
+                attributes: ['isbn','title']
+            }
+        }));
     }catch(err){
         res.status(500).json('internal error')
     }
