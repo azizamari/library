@@ -17,6 +17,7 @@ for (const modelDefiner of modelDefiners) {
 
 const { book, author } = sequelize.models;
 
-author.hasMany(book,{foreignKey:'authorId'})
+book.belongsTo(author)
+author.hasMany(book,{foreignKey:'authorId', onDelete: 'cascade' })
 
 module.exports = sequelize;
