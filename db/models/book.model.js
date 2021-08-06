@@ -5,11 +5,21 @@ module.exports = (sequelize) => {
         isbn:{
             type:DataTypes.INTEGER,
             primaryKey:true,
-            notnull:true,
+            allowNull:false,
+            validate:{
+                notEmpty: {
+                  msg: "The field isbn cannot be empty"
+                }
+            },
         },
         title:{
             type:DataTypes.STRING,
-            notnull:true
+            allowNull:false,
+            validate:{
+                notEmpty: {
+                  msg: "The field title cannot be empty"
+                }
+            },
         },
         releaseYear:{
             type:DataTypes.INTEGER,
@@ -19,6 +29,12 @@ module.exports = (sequelize) => {
         },
         authorId:{
             type: DataTypes.INTEGER,
+            allowNull:false,
+            validate:{
+                notEmpty: {
+                  msg: "The field authorId cannot be empty"
+                }
+            },
             references: {
                 model: 'authors',
                 key: 'id'
