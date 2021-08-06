@@ -13,5 +13,5 @@ app.listen(PORT,()=>{
     console.log(`Library running on port ${PORT}`)
 })
 
-sequelize.sync({force:true})
+sequelize.sync()
     .catch(err=>console.log(err))

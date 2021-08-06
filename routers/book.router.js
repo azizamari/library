@@ -1,10 +1,10 @@
 const express=require('express');
 const bookRouter=express.Router();
-const bookRouter=require('../controllers/author.controller');
+const bookController=require('../controllers/book.controller');
 
-bookRouter.get('/:id',bookRouter.getAuthorById)
-bookRouter.delete('/:id',bookRouter.deleteAuthorById)
-bookRouter.post('/',bookRouter.postAuthor)
-bookRouter.get('/',bookRouter.getAllAuthors)
+bookRouter.get('/:isbn',bookController.getBookById)
+bookRouter.delete('/:isbn',bookController.deleteBookById)
+bookRouter.post('/',bookController.postBook)
+bookRouter.get('/',bookController.getAllBooks)
 
 module.exports=bookRouter
