@@ -5,12 +5,12 @@ module.exports = (sequelize) => {
         id:{
             type:DataTypes.INTEGER,
             primaryKey:true,
-            notnull:true,
+            allowNull:false,
             autoIncrement:true,
         },
         name:{
             type:DataTypes.STRING,
-            notnull:true,
+            allowNull:false,
             validate:{
                 notEmpty: {
                   msg: "The field name cannot be empty"
