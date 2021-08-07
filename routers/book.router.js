@@ -65,6 +65,29 @@ const bookController=require('../controllers/book.controller');
 bookRouter.get('/:isbn',bookController.getBookById)
 bookRouter.put('/:isbn',bookController.updateBook)
 bookRouter.delete('/:isbn',bookController.deleteBookById)
+
+/**
+ * @swagger
+ * /books:
+ *   post:
+ *     summary: Create a new book
+ *     tags: [Books]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Book'
+ *     responses:
+ *       201:
+ *         description: The book was successfully created
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Book'
+ *       500:
+ *         description: Some server error
+ */
 bookRouter.post('/',bookController.postBook)
 
  /**
