@@ -38,6 +38,24 @@ const bookController=require('../controllers/book.controller');
  */
 
 
+ /**
+ * @swagger
+ * /books:
+ *   get:
+ *     summary: Returns the list of all the books
+ *     tags: [Books]
+ *     responses:
+ *       200:
+ *         description: The list of the books
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Book'
+ */
+
+
 /**
  * @swagger
  * /books/{isbn}:
@@ -62,9 +80,52 @@ const bookController=require('../controllers/book.controller');
  *         description: The book was not found
  */
 
-bookRouter.get('/:isbn',bookController.getBookById)
+ /**
+ * @swagger
+ * /books:
+ *   post:
+ *     summary: Create a new book
+ *     tags: [Books]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Book'
+ *     responses:
+ *       201:
+ *         description: The book was successfully created
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Book'
+ *       500:
+ *         description: Some server error
+ */
 
-/**
+ /**
+ * @swagger
+ * /books/{isbn}:
+ *   delete:
+ *     summary: Remove the book by isbn
+ *     tags: [Books]
+ *     parameters:
+ *       - in: path
+ *         name: isbn
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The book isbn
+ * 
+ *     responses:
+ *       200:
+ *         description: The book was deleted
+ *       404:
+ *         description: The book was not found
+ */
+
+
+ /**
  * @swagger
  * /books/{isbn}:
  *  put:
@@ -95,70 +156,11 @@ bookRouter.get('/:isbn',bookController.getBookById)
  *      500:
  *        description: Some error happened
  */
+
+bookRouter.get('/:isbn',bookController.getBookById)
 bookRouter.put('/:isbn',bookController.updateBook)
-
-/**
- * @swagger
- * /books/{isbn}:
- *   delete:
- *     summary: Remove the book by isbn
- *     tags: [Books]
- *     parameters:
- *       - in: path
- *         name: isbn
- *         schema:
- *           type: string
- *         required: true
- *         description: The book isbn
- * 
- *     responses:
- *       200:
- *         description: The book was deleted
- *       404:
- *         description: The book was not found
- */
 bookRouter.delete('/:isbn',bookController.deleteBookById)
-
-/**
- * @swagger
- * /books:
- *   post:
- *     summary: Create a new book
- *     tags: [Books]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/Book'
- *     responses:
- *       201:
- *         description: The book was successfully created
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Book'
- *       500:
- *         description: Some server error
- */
 bookRouter.post('/',bookController.postBook)
-
- /**
- * @swagger
- * /books:
- *   get:
- *     summary: Returns the list of all the books
- *     tags: [Books]
- *     responses:
- *       200:
- *         description: The list of the books
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 $ref: '#/components/schemas/Book'
- */
 bookRouter.get('/',bookController.getAllBooks)
 
 module.exports=bookRouter
