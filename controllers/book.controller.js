@@ -25,7 +25,7 @@ exports.getBookById=async (req,res)=>{
 }
 exports.postBook=async (req,res)=>{
     if(await author.findByPk(req.body.authorId)==null)
-        res.status(404).json({message:`Author with id ${req.body.authorId} does not exist`})
+        res.status(404).json({message:`Author with id ${req.body.authorId} does not exist. Please specify a correct authorId`})
 
     book.create(req.body).then(response=>{
         res.status(201).json(response)
@@ -59,7 +59,7 @@ exports.updateBook= async(req,res)=>{
                   attributes: ['name', 'birthYear','gender'],  // return only these columns
                 },
             });
-            return res.status(204).json({ user: updatedBook });
+            return res.status(200).json(updatedBook);
         }
         throw new Error('book not found');
     } catch (error) {
