@@ -15,7 +15,7 @@ const bookController=require('../controllers/book.controller');
  *         - authorId
  *       properties:
  *         isbn:
- *           type: integer
+ *           type: string
  *           description: The International Standard Book Number
  *         title:
  *           type: string
