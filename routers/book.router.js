@@ -63,6 +63,38 @@ const bookController=require('../controllers/book.controller');
  */
 
 bookRouter.get('/:isbn',bookController.getBookById)
+
+/**
+ * @swagger
+ * /books/{isbn}:
+ *  put:
+ *    summary: Update the book by the isbn
+ *    tags: [Books]
+ *    parameters:
+ *      - in: path
+ *        name: isbn
+ *        schema:
+ *          type: string
+ *        required: true
+ *        description: The book isbn
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            $ref: '#/components/schemas/Book'
+ *    responses:
+ *      204:
+ *        description: The book was updated
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/Book'
+ *      404:
+ *        description: The book was not found
+ *      500:
+ *        description: Some error happened
+ */
 bookRouter.put('/:isbn',bookController.updateBook)
 bookRouter.delete('/:isbn',bookController.deleteBookById)
 

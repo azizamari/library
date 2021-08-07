@@ -56,7 +56,7 @@ exports.updateAuthor= async(req,res)=>{
                     attributes: ['isbn','title']
                 }
             });
-            return res.status(200).json({ user: updatedAuthor });
+            return res.status(204).json({ user: updatedAuthor });
         }
         throw new Error('Author not found');
     } catch (error) {

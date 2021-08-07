@@ -59,7 +59,7 @@ exports.updateBook= async(req,res)=>{
                   attributes: ['name', 'birthYear','gender'],  // return only these columns
                 },
             });
-            return res.status(200).json({ user: updatedBook });
+            return res.status(204).json({ user: updatedBook });
         }
         throw new Error('book not found');
     } catch (error) {
