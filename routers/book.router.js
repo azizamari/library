@@ -41,6 +41,23 @@ bookRouter.get('/:isbn',bookController.getBookById)
 bookRouter.put('/:isbn',bookController.updateBook)
 bookRouter.delete('/:isbn',bookController.deleteBookById)
 bookRouter.post('/',bookController.postBook)
+
+ /**
+ * @swagger
+ * /books:
+ *   get:
+ *     summary: Returns the list of all the books
+ *     tags: [Books]
+ *     responses:
+ *       200:
+ *         description: The list of the books
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Book'
+ */
 bookRouter.get('/',bookController.getAllBooks)
 
 module.exports=bookRouter
