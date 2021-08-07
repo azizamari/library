@@ -30,7 +30,7 @@ const bookController=require('../controllers/book.controller');
  *           type: integer
  *           description: Foreign key for the author id
  *       example:
- *         isbn: 9780747532743
+ *         isbn: "9780747532743"
  *         title: Harry Potter and the Philosopher's Stone
  *         releaseYear: 1997
  *         numberOfPages: 223
@@ -96,6 +96,27 @@ bookRouter.get('/:isbn',bookController.getBookById)
  *        description: Some error happened
  */
 bookRouter.put('/:isbn',bookController.updateBook)
+
+/**
+ * @swagger
+ * /books/{isbn}:
+ *   delete:
+ *     summary: Remove the book by isbn
+ *     tags: [Books]
+ *     parameters:
+ *       - in: path
+ *         name: isbn
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The book isbn
+ * 
+ *     responses:
+ *       200:
+ *         description: The book was deleted
+ *       404:
+ *         description: The book was not found
+ */
 bookRouter.delete('/:isbn',bookController.deleteBookById)
 
 /**
