@@ -35,5 +35,21 @@ app.listen(PORT,()=>{
     console.log(`Library running on port ${PORT}`)
 })
 
-sequelize.sync()
+const {book, author}=require('./db').models
+sequelize.sync({force:true})
+    .then(async (_)=>{
+        const authorTest1=await author.create({
+            id: 4,
+            name: "J.K. Rowling",
+            birthYear: 1965, 
+            gender: "female" 
+        })
+        const bookTest1=await book.create({ 
+            isbn: 9780747532743, 
+            title: "Harry Potter and the Philosopher's Stone",
+            releaseYear: 1997,
+            numberOfPages: 223,
+            authorId: 4 
+        })
+    })
     .catch(err=>console.log(err))
