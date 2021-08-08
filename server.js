@@ -29,6 +29,13 @@ const app=express()
 app.use(express.json())
 app.use('/api-docs',swaggerUI.serve,swaggerUI.setup(sepcs))
 
+
+app.use((req,res,next)=>{
+    res.setHeader('Access-Control-Allow-Origin','*');
+    res.setHeader('Access-Control-Allow-Methods','GET, POST, PUT, OPTIONS, DELETE');
+    res.setHeader('Access-Control-Allow-Headers','*');
+    next()
+})
 app.use('/',routers)
 
 app.listen(PORT,()=>{
