@@ -37,6 +37,9 @@ app.use((req,res,next)=>{
     next()
 })
 app.use('/',routers)
+app.get('/',(req,res)=>{
+    res.redirect('/api-docs')
+})
 
 app.listen(PORT,()=>{
     console.log(`Library running on port ${PORT}`)
